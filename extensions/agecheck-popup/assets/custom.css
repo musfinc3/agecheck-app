@@ -1,0 +1,258 @@
+[dir="ltr"] .modal__overlay__agecheck {
+    left: 0;
+  }
+  
+  [dir="rtl"] .modal__overlay__agecheck {
+    right: 0;
+  }
+  
+  .modal__overlay__agecheck {
+    position: absolute;
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    bottom: calc(100% - 10px); /* There is a border radius on the header on mobile so we slightly move down the overlay */
+    backdrop-filter:blur(5px);
+    background: rgb(0 0 0 / 50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  }
+  
+  .modal[open] > .modal__overlay__agecheck {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media screen and (min-width: 741px) {
+    .modal__overlay__agecheck {
+      position: fixed;
+      top: 0;
+      bottom: auto;
+    }
+}
+
+@media not screen and (pointer: fine) {
+    .multi-column__arrow:not([disabled]) {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+  }
+  .newsletter__form {
+    margin-top: 32px;
+  }
+  
+  .newsletter__form .input-row {
+    grid-template-columns: none; /* As the newsletter box is small there is not enough space to fit on smaller screens */
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .newsletter__form .input-row {
+      grid-template-columns: 1fr auto; /* Small variation for this section */
+    }
+  }
+  .newsletter-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .newsletter-modal__image {
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
+  }
+  
+  .newsletter-modal__content {
+    padding: 32px 24px 40px;
+    width: 100%;
+  }
+  
+  .newsletter-modal__content--extra {
+    padding-top: 40px; /* If there is an image the close button is within the text so we have to increase the padding */
+  }
+  
+  @media screen and (max-width: 740px) {
+    .newsletter-modal {
+      max-height: inherit;
+    }
+  
+    .newsletter-modal__image {
+      max-height: 200px;
+    }
+  
+    .newsletter-modal__content {
+      overflow: auto;
+    }
+  }
+  
+  @media screen and (min-width: 741px) and (max-width: 999px) {
+    .newsletter-modal__image {
+      max-height: 350px;
+    }
+  }
+  
+  @media screen and (min-width: 741px) {
+    .newsletter-modal__content {
+      padding: 60px;
+    }
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .newsletter-modal {
+      flex-direction: row;
+    }
+  
+    .newsletter-modal--reverse {
+      flex-direction: row-reverse;
+    }
+  
+    .newsletter-modal__image,
+    .newsletter-modal__content {
+      flex: 1 0 0;
+      max-width: 500px;
+      min-width: 500px;
+    }
+  
+    .newsletter-modal__content {
+      padding: 80px;
+    }
+  }
+
+/**
+ * -------------------------------------------------------------
+ * MODAL
+ *
+ * Modal allows to provide a full-screen off-screen elements. On mobile, they look
+ * like popover, while on tablet and desktop they use an immersive full-screen elements. Because
+ * modal are much more "free" than popover and drawer in their structure, the styling
+ * is left to the actual inner content
+ * -------------------------------------------------------------
+ */
+
+ [dir="ltr"] .modal {
+    left: 0;
+  }
+  
+  [dir="rtl"] .modal {
+    right: 0;
+  }
+  
+  .modal {
+    /* Make sure the modal component does not inherit values from the section it is included to */
+    --heading-color: var(--root-heading-color);
+    --text-color: var(--root-text-color);
+    --background: var(--root-background);
+  
+    position: fixed;
+    font-size: 1rem;
+    z-index: 10;
+    visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
+  }
+  
+  .modal[open] {
+    visibility: visible;
+  }
+  
+  [dir="ltr"] .modal__overlay {
+    left: 0;
+  }
+  
+  [dir="rtl"] .modal__overlay {
+    right: 0;
+  }
+  
+  .modal__overlay {
+    position: absolute;
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    bottom: calc(100% - 10px); /* There is a border radius on the header on mobile so we slightly move down the overlay */
+    background: #000000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  }
+  
+  .modal[open] > .modal__overlay {
+    visibility: visible;
+    opacity: 0.3;
+  }
+  
+  [dir="ltr"] .modal__close-button {
+    right: 24px;
+  }
+  
+  [dir="rtl"] .modal__close-button {
+    left: 24px;
+  }
+  
+  .modal__close-button {
+    position: absolute;
+    top: 24px;
+    z-index: 1;
+  }
+  
+  .modal__content {
+    position: relative;
+    display: flow-root;
+    background: rgb(var(--background));
+    color: rgb(var(--text-color));
+    border-radius: var(--block-border-radius);
+  }
+  
+  @media screen and (max-width: 740px) {
+    .modal {
+      bottom: 0;
+      width: 100vw;
+      transform: translateY(100%);
+      transition: transform 0.7s cubic-bezier(0.75, 0, 0.175, 1), visibility 0.7s cubic-bezier(0.75, 0, 0.175, 1);
+      touch-action: manipulation;
+    }
+  
+    .modal[open] {
+      transform: translateY(0);
+    }
+  
+    .modal__content {
+      max-height: 81vh;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+    }
+  }
+  
+  @media screen and (min-width: 741px) {
+    .modal {
+      display: flex;
+      top: 0;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .modal__overlay {
+      position: fixed;
+      top: 0;
+      bottom: auto;
+    }
+  
+    .modal__content {
+      margin: 80px; /* Allows to guarantee spacing around the edges */
+      max-height: calc(100vh - 160px);
+      overflow: auto;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.75, 0, 0.175, 1), opacity 0.3s cubic-bezier(0.75, 0, 0.175, 1);
+      will-change: transform;
+    }
+  
+    .modal[open] .modal__content {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+

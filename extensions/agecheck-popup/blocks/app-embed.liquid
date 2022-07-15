@@ -1,0 +1,152 @@
+{%- if block.settings.enable -%}
+  {%- if block.settings.image != blank -%}
+    <style>
+      @media screen and (max-width: 999px) {
+        .modal__close-button {
+          color: rgb(255, 255, 255);
+        }
+      }
+    </style>
+  {%- endif -%}
+
+  {%- assign should_appear_automatically = false -%}
+
+    {%- unless block.settings.show_only_for_visitors and customer -%}
+      {%- assign should_appear_automatically = true -%}
+    {%- endunless -%}
+
+  <modal-content-age block="{{ block.id }}" block.settings.show_only_once only-once {% if should_appear_automatically %}apparition-delay="{{ block.settings.apparition_delay }}"{% endif %} class="modal">
+    <div class="modal__overlay__agecheck" id="agecheck-overlay"  oncontextmenu="return false;"></div>
+    <div class="modal__content" data-dismissible="false">
+
+      <div class="newsletter-modal {% if block.settings.image_position == 'right' %}newsletter-modal--reverse{% endif %}">
+        {%- if block.settings.image != blank -%}
+          <img class="newsletter-modal__image" loading="lazy" sizes="(max-width: 740px) 100vw, 500px" {% render 'image-attributes', image: block.settings.image, sizes: '300,400,500,600,700,800,900,1000' %}>
+        {%- endif -%}
+
+        <div class="newsletter-modal__content {% if block.settings.image != blank %}newsletter-modal__content--extra{% endif %} text-container text--center">
+          {%- if block.settings.title-agecheck != blank -%}
+            <h2 class="heading h5">{{ block.settings.title-agecheck | escape }}</h2>
+          {%- endif -%}
+
+          {%- if block.settings.content-agecheck != blank -%}
+            {{- block.settings.content-agecheck -}}
+          {%- endif -%}
+                <button onclick="agecheck()" type="button" data-action="close"
+                  class="button button--primary button--full">{{ block.settings.button-text-yes }}</button>
+                <script>
+                    function agecheck() {
+                    localStorage.setItem('Agecheck', 'true');
+                  }
+                </script>
+                <a href="{{ block.settings.button_link }}" target="_blank" id="agecheckdecline"style="margin-top: var(--form-input-gap);"
+                  class="button button--secondary button--full">{{ block.settings.button-text-no }}</a>
+        
+                  <script>
+                    let agecheckdecline = document.querySelector("#agecheckdecline");
+                    localStorage.setItem('Name','Ohje, schade!');
+                    let name = localStorage.getItem('Name');
+                      
+                    (function (){
+                      agecheckdecline.onclick = function() {
+                        agecheckdecline.textContent = name;
+                        };
+                    })();
+                  </script>
+            {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </modal-content-age>
+  <style>
+    [aria-controls="agecheck-popup"] {
+      display: none; /* Allows to hide the toggle icon in the header if the section is disabled */
+    }
+  </style>
+
+{% schema %}
+
+{
+  "name": "Agecheck",
+  "target" : "body",
+  "stylesheet": "custom.css",
+  "javascript": "theme.js",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "apparition_delay",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "sec",
+      "label": "Delay until the popup appears",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_only_for_visitors",
+      "label": "Disable for account holders",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1000 x 1000px .jpg recommended"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "title-agecheck",
+      "label": "Heading",
+      "default": "Greetings!"
+    },
+    {
+      "type": "text",
+      "id": "button-text-yes",
+      "label": "Yes Button Text",
+      "default": "Yes"
+    },
+    {
+      "type": "text",
+      "id": "button-text-no",
+      "label": "No Button Text",
+      "default": "No"
+    },
+    
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "No Button Custom URL"
+    },
+
+    {
+      "type": "richtext",
+      "id": "content-agecheck",
+      "label": "Text",
+      "default": "<p>Are you now 18 years old or above?</p>"
+    }
+  ]
+}
+{% endschema %}
