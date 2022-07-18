@@ -19,19 +19,20 @@
     <div class="modal__overlay__agecheck" id="agecheck-overlay"  oncontextmenu="return false;"></div>
     <div class="modal__content" data-dismissible="false">
 
-      <div class="newsletter-modal {% if block.settings.image_position == 'right' %}newsletter-modal--reverse{% endif %}">
+      <div style="background:{{block.settings.background_color }}" class="newsletter-modal-agecheck {% if block.settings.image_position == 'right' %}newsletter-modal-agecheck--reverse{% endif %}">
         {%- if block.settings.image != blank -%}
-          <img class="newsletter-modal__image" loading="lazy" sizes="(max-width: 740px) 100vw, 500px" {% render 'image-attributes', image: block.settings.image, sizes: '300,400,500,600,700,800,900,1000' %}>
+          <img class="newsletter-modal-agecheck__image" loading="lazy" sizes="(max-width: 740px) 100vw, 500px" {% render 'image-attributes', image: block.settings.image, sizes: '300,400,500,600,700,800,900,1000' %}>
         {%- endif -%}
 
-        <div class="newsletter-modal__content {% if block.settings.image != blank %}newsletter-modal__content--extra{% endif %} text-container text--center">
+        <div class="newsletter-modal-agecheck__content {% if block.settings.image != blank %}newsletter-modal-agecheck__content--extra{% endif %} text-container text--center">
           {%- if block.settings.title-agecheck != blank -%}
-            <h2 class="heading h5">{{ block.settings.title-agecheck | escape }}</h2>
+            <h2 style="font-size: {{ block.settings.font-size}}px;">{{ block.settings.title-agecheck | escape }}</h2>
           {%- endif -%}
 
           {%- if block.settings.content-agecheck != blank -%}
-            {{- block.settings.content-agecheck -}}
+          <h4>  {{- block.settings.content-agecheck -}} <h4>
           {%- endif -%}
+
                 <button onclick="agecheck()" type="button" data-action="close"
                   class="button button--primary button--full">{{ block.settings.button-text-yes }}</button>
                 <script>
@@ -125,13 +126,13 @@
     {
       "type": "text",
       "id": "button-text-yes",
-      "label": "Yes Button Text",
+      "label": "Yes Button Title",
       "default": "Yes"
     },
     {
       "type": "text",
       "id": "button-text-no",
-      "label": "No Button Text",
+      "label": "No Button Title",
       "default": "No"
     },
     
@@ -140,6 +141,13 @@
       "id": "button_link",
       "label": "No Button Custom URL"
     },
+
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+   },
 
     {
       "type": "richtext",

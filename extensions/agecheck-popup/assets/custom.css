@@ -52,71 +52,71 @@
       grid-template-columns: 1fr auto; /* Small variation for this section */
     }
   }
-  .newsletter-modal {
+  .newsletter-modal-agecheck {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  .newsletter-modal__image {
+  .newsletter-modal-agecheck__image {
     -o-object-fit: cover;
        object-fit: cover;
     -o-object-position: center;
        object-position: center;
   }
   
-  .newsletter-modal__content {
+  .newsletter-modal-agecheck__content {
     padding: 32px 24px 40px;
     width: 100%;
   }
   
-  .newsletter-modal__content--extra {
+  .newsletter-modal-agecheck__content--extra {
     padding-top: 40px; /* If there is an image the close button is within the text so we have to increase the padding */
   }
   
   @media screen and (max-width: 740px) {
-    .newsletter-modal {
+    .newsletter-modal-agecheck {
       max-height: inherit;
     }
   
-    .newsletter-modal__image {
+    .newsletter-modal-agecheck__image {
       max-height: 200px;
     }
   
-    .newsletter-modal__content {
+    .newsletter-modal-agecheck__content {
       overflow: auto;
     }
   }
   
   @media screen and (min-width: 741px) and (max-width: 999px) {
-    .newsletter-modal__image {
+    .newsletter-modal-agecheck__image {
       max-height: 350px;
     }
   }
   
   @media screen and (min-width: 741px) {
-    .newsletter-modal__content {
+    .newsletter-modal-agecheck__content {
       padding: 60px;
     }
   }
   
   @media screen and (min-width: 1000px) {
-    .newsletter-modal {
+    .newsletter-modal-agecheck {
       flex-direction: row;
     }
   
-    .newsletter-modal--reverse {
+    .newsletter-modal-agecheck--reverse {
       flex-direction: row-reverse;
     }
   
-    .newsletter-modal__image,
-    .newsletter-modal__content {
+    .newsletter-modal-agecheck__image,
+    .newsletter-modal-agecheck__content {
       flex: 1 0 0;
       max-width: 500px;
       min-width: 500px;
     }
   
-    .newsletter-modal__content {
+    .newsletter-modal-agecheck__content {
       padding: 80px;
     }
   }
